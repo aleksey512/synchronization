@@ -79,34 +79,34 @@ class GeneralSynchronization {
         LOG.debug("out");
     }
 
-public void synchronizedBlockOnClassField() throws InterruptedException {
-    LOG.debug("in");
+    public void synchronizedBlockOnClassField() throws InterruptedException {
+        LOG.debug("in");
 
-    synchronized (this.counter) {
-        LOG.debug("acquired lock");
+        synchronized (this.counter) {
+            LOG.debug("acquired lock");
+
+            counter++;
+
+            LOG.debug("counter: " + counter);
+
+            Thread.sleep(SLEEP_TIME);
+
+            LOG.debug("released lock");
+        }
+
+        LOG.debug("out");
+    }
+
+    public void unsynchronizedAccessToClassField() throws InterruptedException {
+        LOG.debug("in");
+
+        Thread.sleep(1000);
 
         counter++;
 
         LOG.debug("counter: " + counter);
 
-        Thread.sleep(SLEEP_TIME);
-
-        LOG.debug("released lock");
+        LOG.debug("out");
     }
-
-    LOG.debug("out");
-}
-
-public void unsynchronizedAccessToClassField() throws InterruptedException {
-    LOG.debug("in");
-
-    Thread.sleep(1000);
-
-    counter++;
-
-    LOG.debug("counter: " + counter);
-
-    LOG.debug("out");
-}
 
 }
