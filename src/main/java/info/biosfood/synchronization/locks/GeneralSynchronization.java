@@ -9,7 +9,7 @@ class GeneralSynchronization {
 
     static final long SLEEP_TIME = 2000L;
 
-    Counter counter = new Counter();
+    Integer counter = new Integer(0);
 
     public static synchronized void synchronizedStaticMethod() throws InterruptedException {
         LOG.debug("in");
@@ -79,34 +79,34 @@ class GeneralSynchronization {
         LOG.debug("out");
     }
 
-    public void synchronizedBlockOnClassField() throws InterruptedException {
-        LOG.debug("in");
+public void synchronizedBlockOnClassField() throws InterruptedException {
+    LOG.debug("in");
 
-        synchronized (this.counter) {
-            LOG.debug("acquired lock");
+    synchronized (this.counter) {
+        LOG.debug("acquired lock");
 
-            counter.increment();
+        counter++;
 
-            LOG.debug("counter: " + counter.count());
+        LOG.debug("counter: " + counter);
 
-            Thread.sleep(SLEEP_TIME);
+        Thread.sleep(SLEEP_TIME);
 
-            LOG.debug("released lock");
-        }
-
-        LOG.debug("out");
+        LOG.debug("released lock");
     }
 
-    public void unsynchronizedAccessToClassField() throws InterruptedException {
-        LOG.debug("in");
+    LOG.debug("out");
+}
 
-        Thread.sleep(1000);
+public void unsynchronizedAccessToClassField() throws InterruptedException {
+    LOG.debug("in");
 
-        counter.increment();
+    Thread.sleep(1000);
 
-        LOG.debug("counter: " + counter.count());
+    counter++;
 
-        LOG.debug("out");
-    }
+    LOG.debug("counter: " + counter);
+
+    LOG.debug("out");
+}
 
 }
